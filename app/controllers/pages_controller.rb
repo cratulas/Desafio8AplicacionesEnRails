@@ -2,7 +2,7 @@ class PagesController < ApplicationController
   http_basic_authenticate_with name: "desafiovamoscontodo", password: "XAHTJEAS23123%23", only: :dashboard
 
   def index
-    @projects = Project.all
+    #@projects = Project.all
   end
 
   def new
@@ -22,7 +22,19 @@ class PagesController < ApplicationController
   end
 
   def dashboard
-    @projects = Project.all
+    # @projects = Project.all
+    # @projects = Project.exists?(status: params[:q])
+
+
+    if params[:q]
+      @projects = Project.where('name LIKE ?', "%#{params[:q]}%")
+      if @projects.nil?
+        @projects = Project.all
+      end
+    else
+      @projects = Project.all
+    end
+
   end
 
   private

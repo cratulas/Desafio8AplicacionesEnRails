@@ -1,2 +1,29 @@
-<h1>Pages#dashboard</h1>
-<p>Find me in app/views/pages/dashboard.html.erb</p>
+<%= render 'shared/navbar' %>
+<h1 class="text-center">Projects</h1>
+
+
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Start_date</th>
+            <th scope="col">End_date</th>
+            <th scope="col">Status</th>
+            <%# <th colspan="3">Botones</th> %>
+        </tr>
+    </thead>
+    <tbody>
+        <% @projects.each do |project|%>
+            <tr scope="row">
+                <td><%= project.id %></td>
+                <td><%= project.name %></td>
+                <td><%= project.description %></td>
+                <td><%= project.start_date %></td>
+                <td><%= project.end_date %></td>
+                <td><%= project.status %></td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>
