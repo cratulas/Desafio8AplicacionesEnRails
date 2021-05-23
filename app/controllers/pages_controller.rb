@@ -22,19 +22,24 @@ class PagesController < ApplicationController
   end
 
   def dashboard
-    # @projects = Project.all
-    # @projects = Project.exists?(status: params[:q])
-
 
     if params[:q]
-      @projects = Project.where('name LIKE ?', "%#{params[:q]}%")
+      if params[:q] == 'Propuesta'
+        params[:q] = 0
+      elsif params[:q] == 'Progreso'
+        params[:q] = 1
+      elsif params[:q] == 'Terminado'
+        params[:q] = 2
+      end
+      @projects = Project.where('status = ?', params[:q])
+      
       if @projects.nil?
         @projects = Project.all
       end
     else
       @projects = Project.all
     end
-
+  
   end
 
   private
